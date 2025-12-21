@@ -2,20 +2,21 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-ENV PYTHONUNBUFFERED=1
+# 🔥 OS-level dependency for pyodbc
+RUN apt-get update && apt-get install -y \
+    unixodbc \
+    unixodbc-dev \
+    gcc \
+    g++ \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install dependencies
-COPY requirements.txt ./
+COPY requirements.txt .
+
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application
 COPY . .
 
-# Create a non-root user and give ownership to the app directory
-RUN useradd -m appuser && chown -R appuser:appuser /app
-USER appuser
-ENV HOME=/home/appuser
-
-# FastAPI apps are served with uvicorn
 EXPOSE 8000
+
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
