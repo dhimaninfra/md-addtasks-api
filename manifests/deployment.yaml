@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: addtask-api
+spec:
+  selector:
+    matchLabels:
+      app: addtask-api
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: addtask-api
+    spec:
+      containers:
+      - name: addtask-api
+        image: mdcontainerregistry.azurecr.io/addtask-api:v1
+        ports:
+        - containerPort: 8000

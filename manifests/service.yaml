@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: addtask-api-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: addtask-api
+  ports:
+  - port: 80
+    targetPort: 8000
