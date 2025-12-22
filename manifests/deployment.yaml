@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: addtask-api
-        image: mdcontainerregistry.azurecr.io/md-addtasks-api:v1
+        image: mdcontainerregistry.azurecr.io/addmicro-api:v1
         ports:
         - containerPort: 8000
         env:
