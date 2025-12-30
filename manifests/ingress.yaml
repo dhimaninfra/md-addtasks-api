@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: addtask-api-ingress
+  labels:
+    app.kubernetes.io/name: addtask-api-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: addtask-api.dhimaninfra.online
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: addtask-api
+            port: 
+              number: 80
